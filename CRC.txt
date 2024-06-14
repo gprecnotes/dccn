@@ -1,0 +1,74 @@
+import java.util.*;
+public class CRC 
+{
+    public static String concat(String s1,String s2 ) 
+    {
+        return (s1+s2);
+    }
+    public static String rem(String s1,String s2)
+    {
+        int n = s2.length();
+        String temp1 = s1.substring(0,n-1);
+        for(int i=n-1;i<s1.length();i++) 
+        {
+            temp1+=s1.charAt(i);
+            String temp2="";
+            if(temp1.charAt(0)=='1') 
+            {
+                temp2+= s2;
+            }
+            else 
+            {
+                temp2+="0";
+            }
+            int num1 = Integer.parseInt(temp1, 2);
+            int num2 = Integer.parseInt(temp2, 2);
+            int result = num1 ^ num2;
+            String resultBinary = Integer.toBinaryString(result);
+            if(resultBinary.length()<n-1) 
+            {
+                String add="";
+                for(int j=0;j<n-resultBinary.length()-1;j++) 
+                {
+                    add+="0";
+                }
+                resultBinary=add+resultBinary;
+            }
+            temp1=resultBinary;
+        }
+        return temp1;
+    }
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Dividend : ");
+        String dividend = sc.next();
+        System.out.println("Enter Divisor : ");
+        String divisor = sc.next();
+        String concatString="";
+        for(int i=0;i<divisor.length()-1;i++)
+        {
+            concatString+="0";
+        }
+        String senderdividend=concat(dividend,concatString);
+        System.out.println("Sender side : "+senderdividend);
+        String temp1 = rem(senderdividend,divisor);
+        System.out.println("Sender side remainder : "+temp1);
+        String receiverdividend=concat(dividend,temp1);
+        System.out.println("Receiver side : "+receiverdividend);
+        String temp2 = rem(receiverdividend,divisor);
+        System.out.println("Receiver side remainder : "+temp2);
+        sc.close();
+    }
+}
+
+
+OUTPUT
+Enter Dividend :
+1010011110
+Enter Divisor :
+10111
+Sender side : 10100111100000
+Sender side remainder : 1010
+Receiver side : 10100111101010
+Receiver side remainder : 0000

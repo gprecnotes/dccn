@@ -1,0 +1,68 @@
+import java.util.*;
+import java.io.*;
+import java.net.*;
+public class DNS 
+{
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("1.DNS\n2.Exit\nEnter your option : ");
+        int op = sc.nextInt();
+        while(true) 
+        {
+            if(op==1) 
+            {
+                System.out.println("Enter Host : ");
+                String s = sc.next();
+                try 
+                {
+                    InetAddress address = InetAddress.getByName(s);
+                    System.out.println("Host Name :"+address.getHostName());
+                    System.out.print("Host Address :"+address.getHostAddress());
+                }
+                catch(IOException ioe) 
+                {
+
+                }
+            }
+            else 
+            {
+                sc.close();
+                System.exit(0);
+            }
+            System.out.println("\n1.DNS\n2.Exit\nEnter your option : ");
+            op = sc.nextInt();
+        }
+    }
+}
+
+OUTPUT
+
+1.DNS
+2.Exit
+Enter your option :
+1
+Enter Host :
+www.gprec.ac.in
+Host Name : www.gprec.ac.in
+Host Address : 182.50.132.59
+1.DNS
+2.Exit
+Enter your option :
+1
+Enter Host :
+www.google.com
+Host Name : www.google.com
+Host Address : 142.250.192.100
+1.DNS
+2.Exit
+Enter your option :
+1
+Enter Host :
+www.amazon.com
+Host Name : www.amazon.com
+Host Address : 108.157.247.185
+1.DNS
+2.Exit
+Enter your option :
+2

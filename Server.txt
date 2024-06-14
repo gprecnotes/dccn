@@ -1,0 +1,51 @@
+import java.net.*;  
+import java.io.*;  
+class Server
+{  
+    public static void main(String args[])throws Exception
+    {  
+        ServerSocket server=new ServerSocket(5000);
+        System.out.println("Server started");
+        System.out.println("Waiting for a client ...");
+        Socket socket=server.accept();  
+        System.out.println("Client accepted");  
+        DataInputStream in=new DataInputStream(socket.getInputStream());  
+        DataOutputStream out=new DataOutputStream(socket.getOutputStream());  
+        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));  
+        String str="";  
+        while (!str.equals("Over"))
+        {
+            try
+            {
+                str= in.readUTF();
+                System.out.println(str);
+            }
+            catch(IOException i)
+            {
+                System.out.println(i);
+            } 
+        }
+        try
+        {
+            System.out.println("Closing connection");
+            socket.close();
+            in.close();
+        }
+        catch(IOException i)
+        {
+            System.out.println(i);
+        }
+    }
+}  
+
+OUTPUT
+
+Server Started
+Waiting for client .....
+Client accecpted
+HELLO
+HI
+GPREC
+Over
+Closing connection
+

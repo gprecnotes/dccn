@@ -1,0 +1,30 @@
+import java.net.*;  
+import java.io.*;  
+class Client
+{  
+  public static void main(String args[])throws Exception
+  {  
+    Socket socket=new Socket("localhost",5000); 
+    System.out.println("Connected"); 
+    DataInputStream in=new DataInputStream(socket.getInputStream());  
+    DataOutputStream out=new DataOutputStream(socket.getOutputStream());  
+    BufferedReader br=new BufferedReader(new InputStreamReader(System.in));  
+    String str="";  
+    while(!str.equals("Over"))
+    {  
+      str=br.readLine();  
+      out.writeUTF(str);  
+      out.flush();  
+    }    
+    out.close();
+    socket.close();
+    }
+}  
+
+OUTPUT
+
+Connected
+Hello
+Hi
+Gprec
+Over
